@@ -1,4 +1,4 @@
-project "0-Getting-Started"
+project "1-Strings"
     kind "WindowedApp"
 
     includedirs

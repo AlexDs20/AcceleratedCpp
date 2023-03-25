@@ -36,4 +36,5 @@ workspace "Accelerated"
     targetdir ("build/bin/%{prj.name}/%{cfg.longname}")
     objdir ("build/obj/%{prj.name}/%{cfg.longname}")
 
-include "projects/Start"
+include "projects/0-Getting-Started"
+include "projects/1-Strings"
