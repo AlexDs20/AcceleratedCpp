@@ -1,13 +1,13 @@
 #include <algorithm>
-#include <stdexcept>
 #include <iomanip>
 #include <ios>
 #include <iostream>
+#include <stdexcept>
 #include <string>
 #include <vector>
 
-#include "median.hpp"
-#include "utils.hpp"
+#include "grade.hpp"
+#include "student_info.hpp"
 
 
 int main()
