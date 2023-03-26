@@ -38,3 +38,4 @@ workspace "Accelerated"
 
 include "projects/0-Getting-Started"
 include "projects/1-Strings"
+include "projects/2-Loops"
