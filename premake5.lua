@@ -25,6 +25,15 @@ workspace "Accelerated"
         -- Release should be optimized
         optimize "On"
 
+    filter "system:linux"
+        defines{ "_X11" }
+
+    filter "system:windows"
+        defines { "_WINDOWS" }
+
+    filter "system:Mac"
+        defines { "_MAC" }
+
     -- Reset the filter for other settings
     filter { }
 
