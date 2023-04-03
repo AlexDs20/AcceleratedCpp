@@ -5,7 +5,7 @@
 #include "median.hpp"
 #include "student_info.hpp"
 
-double grade(double midterm, double final, double homework)
+inline double grade(double midterm, double final, double homework)
 {
     return 0.2 * midterm + 0.4 * final + 0.4 * homework;
 }
