@@ -10,7 +10,7 @@
 
 #include "grade.hpp"
 #include "student_info.hpp"
-
+#include "process.hpp"
 
 std::vector<std::string> split_string_by_spaces(const std::string&);
 std::vector<std::string> split(const std::string&);
@@ -23,48 +23,41 @@ std::vector<std::string> find_urls(const std::string& s);
 std::string::const_iterator url_end(std::string::const_iterator b, std::string::const_iterator e);
 std::string::const_iterator url_beg(std::string::const_iterator b, std::string::const_iterator e);
 bool not_url_char(char c);
+void side_stuff();
 
 int main()
 {
-    std::vector<Student_info> students;
-    Student_info record;
-    std::string::size_type maxlen = 0;
+    // side_stuff();
 
-    std::string url = "asdfqf sdfq http://HELLOW.com and another one https://anotherone.com";
-    std::vector<std::string> url_list;
-    url_list = find_urls(url);
-    for (std::vector<std::string>::size_type i = 0; i!=url_list.size(); ++i)
-        std::cout << url_list[i] << std::endl;
+    if (true) {
+        std::vector<Student_info> students;
+        Student_info record;
+        std::string::size_type maxlen = 0;
 
-    std::string text = "This is a test.";
-    std::vector<std::string> words = split_string_by_spaces(text);
-    words = split(text);
-    for (std::vector<std::string>::const_iterator iter = words.begin(); iter != words.end(); ++iter)
-        std::cout << *iter << std::endl;
+        // list of students who did all the homework and those who didnt
+        std::vector<Student_info> did, didnt;
 
-
-    // Example of framing
-    std::vector<std::string> p = {
-        "This is an",
-        "example",
-        "to",
-        "illustrate",
-        "framing",
-    };
-
-    std::vector<std::string> new_p = frame(p);
-    p = vconcat(p, new_p);
-    p = hconcat(p, frame(p));
-
-    for (std::vector<std::string>::size_type i = 0; i != p.size(); ++i){
-        std::cout << p[i] << std::endl;
-    }
-
-    if (false) {
         while(read(std::cin, record)){
             maxlen = std::max(maxlen, record.name.size());
+            if (did_all_hw(record))
+                did.push_back(record);
+            else
+                didnt.push_back(record);
+            // also keep all the studens so the previous code does not break
             students.push_back(record);
         }
+
+        // check that some students did all and some students didnt do all the homework
+        if (did.empty()) {
+            std::cout << "No students did all hw!" << std::endl;
+            return 1;
+        }
+        if (didnt.empty()) {
+            std::cout << "Every students did all hw!" << std::endl;
+            return 1;
+        }
+
+        process_records(did, didnt);
 
         // order the students by name
         sort(students.begin(), students.end(), compare);
@@ -104,6 +97,39 @@ int main()
     }
 
     return 0;
+}
+
+void side_stuff() {
+    std::string url = "asdfqf sdfq http://HELLOW.com"
+        " and another one https://anotherone.com";
+    std::vector<std::string> url_list;
+    url_list = find_urls(url);
+    for (std::vector<std::string>::size_type i = 0; i!=url_list.size(); ++i)
+        std::cout << url_list[i] << std::endl;
+
+    std::string text = "This is a test.";
+    std::vector<std::string> words = split_string_by_spaces(text);
+    words = split(text);
+    for (std::vector<std::string>::const_iterator iter = words.begin(); iter != words.end(); ++iter)
+        std::cout << *iter << std::endl;
+
+
+    // Example of framing
+    std::vector<std::string> p = {
+        "This is an",
+        "example",
+        "to",
+        "illustrate",
+        "framing",
+    };
+
+    std::vector<std::string> new_p = frame(p);
+    p = vconcat(p, new_p);
+    p = hconcat(p, frame(p));
+
+    for (std::vector<std::string>::size_type i = 0; i != p.size(); ++i){
+        std::cout << p[i] << std::endl;
+    }
 }
 
 std::vector<std::string> vconcat(const std::vector<std::string>& top, const std::vector<std::string>& bottom){

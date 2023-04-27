@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <vector>
 #include <list>
 #include <stdexcept>
@@ -6,8 +7,7 @@
 #include "median.hpp"
 #include "student_info.hpp"
 
-inline double grade(double midterm, double final, double homework)
-{
+double grade(double midterm, double final, double homework) {
     return 0.2 * midterm + 0.4 * final + 0.4 * homework;
 }
 
@@ -24,8 +24,25 @@ double grade(const Student_info& s){
     return grade(s.midterm, s.final, s.homework);
 }
 
+double grade_aux(const Student_info& s){
+    // the grade func on students throws an error if no homework are done.
+    // we handle that error here by setting it to 0.
+    //
+    // it also solves the issue that when calling transform, now the function knows grade_aux as it is not overloaded
+    // with just grade, that function is overloaded and the compiler does not know which one to call
+    try {
+        return grade(s);
+    } catch (std::domain_error) {
+        return grade(s.midterm, s.final, 0);
+    }
+}
+
 bool fgrade(const Student_info& s){
     return grade(s) < 60;
+}
+
+bool did_all_hw(const Student_info& s){
+    return (std::find(s.homework.begin(), s.homework.end(), 0) == s.homework.end());
 }
 
 std::vector<Student_info> slow_extract_failed(std::vector<Student_info>& students){
