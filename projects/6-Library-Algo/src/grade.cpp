@@ -37,12 +37,35 @@ double grade_aux(const Student_info& s){
     }
 }
 
+bool pgrade(const Student_info& s){
+    return !fgrade(s);
+}
+
 bool fgrade(const Student_info& s){
     return grade(s) < 60;
 }
 
 bool did_all_hw(const Student_info& s){
     return (std::find(s.homework.begin(), s.homework.end(), 0) == s.homework.end());
+}
+
+std::vector<Student_info> single_pass_extract_fails(std::vector<Student_info>& students){
+    // this method rearranges the students so that the passing students and failing students are grouped
+    // it returns an iter. to the first element of the second category
+    std::vector<Student_info>::iterator iter = std::stable_partition(students.begin(),
+            students.end(), pgrade);
+    std::vector<Student_info> fail(iter, students.end());
+    students.erase(iter, students.end());
+    return fail;
+}
+
+std::vector<Student_info> two_pass_extract_fails(std::vector<Student_info>& students){
+    std::vector<Student_info> fail;
+    std::remove_copy_if(students.begin(), students.end(),
+            back_inserter(fail), pgrade);
+    students.erase(remove_if(students.begin(), students.end(), fgrade),
+            students.end());
+    return fail;
 }
 
 std::vector<Student_info> slow_extract_failed(std::vector<Student_info>& students){
