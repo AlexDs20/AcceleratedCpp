@@ -6,6 +6,9 @@
 - find_if_not
 They all return an iterator at the position when the "thing" happens if it happens, otherwise returns the second parameters
 
+- search: searches for a pattern in between two iterators
+
+
 
 ## new concept
 
