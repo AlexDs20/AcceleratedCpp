@@ -12,7 +12,7 @@ The sequential containers keep the elements in the order we set them in until we
     - most common is called a *map*
 
 ### map
-- *std::map<std::string, int> var*;
+- ```std::map<std::string, int> var;```
 - When creating a new key with *var[key]* it initializes the value depending on the type, here *int &rarr; 0*
 
 ### Pass function as argument
@@ -28,7 +28,7 @@ void example( return_type function(function_arguments) );
 
 which in practice could be something like:
 
-```
+```c++
 std::map< std::string, std::vector<int> > xref(
         std::istream& in,
         std::vector<std::string> find_words(const std::string&))
@@ -39,7 +39,7 @@ where we pass a function called *find_words* to the function called xref.
 ### Set default value to function argument
 We can give a default value to an argument by setting it in the function declaration e.g.
 
-```
+```c++
 std::map< std::string, std::vector<int> > xref(
         std::istream& in,
         std::vector<std::string> find_words(const std::string&) = split)
