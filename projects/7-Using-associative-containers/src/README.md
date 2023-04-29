@@ -21,22 +21,28 @@ We can do that by specifying
 - a function name to be used
 - the argument types of the function
 So that:
-´´´
+
+```
 void example( return_type function(function_arguments) );
-´´´
+```
+
 which in practice could be something like:
-´´´
+
+```
 std::map< std::string, std::vector<int> > xref(
         std::istream& in,
         std::vector<std::string> find_words(const std::string&))
-´´´
+```
+
 where we pass a function called *find_words* to the function called xref.
 
 ### Set default value to function argument
 We can give a default value to an argument by setting it in the function declaration e.g.
-´´´
+
+```
 std::map< std::string, std::vector<int> > xref(
         std::istream& in,
         std::vector<std::string> find_words(const std::string&) = split)
-´´´
+```
+
 which means that if no function is given to *xref* for *find_words* then it will use the default which is the *split* function.
