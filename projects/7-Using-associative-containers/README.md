@@ -12,7 +12,7 @@ The sequential containers keep the elements in the order we set them in until we
     - most common is called a *map*
 
 ### map
-- ```std::map<std::string, int> var;```
+- `std::map<std::string, int> var;`
 - When creating a new key with *var[key]* it initializes the value depending on the type, here *int &rarr; 0*
 
 ### Pass function as argument
@@ -46,3 +46,33 @@ std::map< std::string, std::vector<int> > xref(
 ```
 
 which means that if no function is given to *xref* for *find_words* then it will use the default which is the *split* function.
+
+### reference variable (&)
+defining a variable like so:
+```c++
+int& i = j;
+```
+
+just defines a **synonym** for j.
+That is i just becomes another name for the variable j;
+
+One can also of course define it as a *const*:
+
+```c++
+const int& i = j;
+```
+
+### Random numbers
+in `<cstdlib>` &rarr; *rand()* returns a value in *[0, RAND_MAX]* (included!)
+
+
+### Performance
+- the *key* must be mapped to a memory location
+    - this may be very costly depending on the type of the *key*
+
+- Access *log(N)*
+
+- it may be a bit slower than the best hash tables
+- but much faster than naive data structures
+
+- the *key* type **MUST** have *<* defined.
