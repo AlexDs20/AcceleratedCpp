@@ -62,6 +62,8 @@ One can also of course define it as a *const*:
 const int& i = j;
 ```
 
+in which case we **cannot** change the value of *j* by doing `i = 4;`
+
 ### Random numbers
 in `<cstdlib>` &rarr; *rand()* returns a value in *[0, RAND_MAX]* (included!)
 

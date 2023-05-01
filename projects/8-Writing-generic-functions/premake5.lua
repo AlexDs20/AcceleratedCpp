@@ -1,5 +1,6 @@
-project "7-Using-associative-containers"
+project "8-Writing-generic-functions"
     kind "ConsoleApp"
+    language "C++"
 
     includedirs
     {
