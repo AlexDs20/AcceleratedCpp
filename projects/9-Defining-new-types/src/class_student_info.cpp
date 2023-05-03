@@ -5,6 +5,11 @@
 #include <string>
 #include "class_student_info.hpp"
 
+Student_info::Student_info(std::istream& is)
+{
+    read(is);
+}
+
 
 double grade(double mid, double final, const std::vector<double>& hw)
 {
