@@ -10,6 +10,9 @@
 
 class Student_info {
     public:
+        Student_info(): midterm(0), final(0){};     // default constructor: used to make sure the data members are properly initialized using constructor initializer list
+        Student_info(std::istream&);
+
         double grade() const;
         std::istream& read(std::istream&);
         std::string name() const {return n;};
