@@ -2,6 +2,8 @@
 
 int main()
 {
-    array_and_pointers();
+    // array_and_pointers();
+    // array();
+    pointer_arithmetic();
     return 0;
 }

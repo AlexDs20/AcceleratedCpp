@@ -37,4 +37,24 @@ int* p, q;
 ```c++
 int *p, q;
 ```
-makes it clearer.
+makes it clearer that *p* points to * \\*p * which is an *int*
+.
+
+
+## Arrays
+- Number of elements must be known at compile time
+- Not class types &rarr; no members (such as *size_type*)
+    - use **size_t** from *<cstddef>* instead
+    - use **size_t** to deal with size of container
+
+- When use name of array as value, the name is a pointer to the first element of the array
+```c++
+double c[3];
+*c = 1.5;    // sets the value of c[0] to 1.5
+```
+
+## Pointer Arithmetic
+
+if pointer *p* points to m
+    - &rarr; *(p+n)* points to *m+n*
+    - &rarr; *(p-n)* points to *m-n*
