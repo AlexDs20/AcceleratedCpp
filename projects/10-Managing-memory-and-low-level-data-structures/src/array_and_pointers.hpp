@@ -3,6 +3,8 @@
 
 
 void array_and_pointers();
+void array();
+void pointer_arithmetic();
 
 
 #endif
