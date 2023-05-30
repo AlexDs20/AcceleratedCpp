@@ -76,3 +76,7 @@ Then can define a function that returns a pointer to a func.
 typedef int (*function_fp(int))
 function_fp get_function_ptr();
 ```
+
+## Arrays
+- kind of container part of core language
+- contain sequence of one or more objects of the same type
