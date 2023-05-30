@@ -1,17 +1,37 @@
 #include <iostream>
+#include <vector>
+#include <numeric>
+#include <algorithm>
 
 
 void pointers();
+
+// --------------------
 void function_pointers();
 int function_int(int);
 int function_arg(int func(int), int);
 int function_arg2(int (*func)(int), int);
+typedef int (*func_ptr)(int);       // define type: func_ptr that is a pointer to function with int arg and returns int.
+func_ptr get_function_ptr(int func(int));
+
+// --------------------
+void application();
+template<class In, class Pred>
+In my_find_if(In begin, In end, Pred f){
+    while (begin != end && !f(*begin))
+        ++begin;
+    return begin;
+};
+bool is_neg(int n){
+    return n<0;
+};
 
 
 int main()
 {
     // pointers();
-    function_pointers();
+    // function_pointers();
+    application();
 }
 
 void pointers(){
@@ -58,6 +78,10 @@ void function_pointers(){
 
     out = function_arg(function_int, 8);
     std::cout << out << std::endl;
+
+    // function returning a pointer to another function
+    typedef int (*func_ptr)(int);       // define type: func_ptr that is a pointer to function with int arg and returns int.
+    func_ptr get_function_ptr(function_int);
 };
 
 int function_int(int i){
@@ -69,4 +93,20 @@ int function_arg(int func(int), int i){
 };
 int function_arg2(int (*func)(int), int i){
     return func(i);
+};
+func_ptr get_function_ptr(int func(int)){
+    return func;
+};
+
+void application(){
+    std::vector<int> a(10);
+    std::iota(a.begin(), a.end(), -2);
+    std::reverse(a.begin(), a.end());
+
+    for (auto e: a)
+        std::cout << e << ' ';
+    std::cout << std::endl;
+
+    std::vector<int>::iterator i = my_find_if(a.begin(), a.end(), is_neg);
+    std::cout << *i << std::endl;
 };
