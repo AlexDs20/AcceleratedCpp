@@ -2,10 +2,13 @@ project "10-Managing-memory"
     kind "ConsoleApp"
     language "C++"
 
-    includedirs { "src/" }
+    includedirs
+    {
+        "src/"
+    }
 
     files
     {
-        "src/**.hpp",
         "src/**.cpp",
+        "src/**.hpp"
     }

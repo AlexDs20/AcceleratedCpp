@@ -3,6 +3,7 @@
 #include <numeric>
 #include <algorithm>
 
+#include "array_and_pointers.hpp"
 
 void pointers();
 
@@ -26,13 +27,19 @@ bool is_neg(int n){
     return n<0;
 };
 
-
 int main()
 {
-    // pointers();
-    // function_pointers();
-    application();
+    // array_and_pointers();
+    // array();
+    if (false) {
+        // pointers();
+        // function_pointers();
+        application();
+    }
+    pointer_arithmetic();
+    return 0;
 }
+
 
 void pointers(){
     std::cout << "POINTERS" << std::endl;
