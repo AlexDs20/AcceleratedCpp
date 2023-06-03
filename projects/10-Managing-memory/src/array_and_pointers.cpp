@@ -165,4 +165,14 @@ void pointer_arithmetic () {
 };
 
 void indexing_10_1_5(){
+    double array[] = {
+        0., 0.5, 1.0
+    };
+
+    // point to element 1 of the array
+    double *p = array + 1;
+    std::cout << *p << std::endl;
+    // can access using indices because pointer is like iterator
+    std::cout << p[-1] << ", " << p[0] << ", " << p[1] << std::endl;
+    std::cout << array[0] << ", " << array[1] << ", " << array[2] << std::endl;
 };
