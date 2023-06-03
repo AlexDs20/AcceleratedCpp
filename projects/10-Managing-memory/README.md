@@ -119,5 +119,39 @@ double c[3];
 ## Pointer Arithmetic
 
 if pointer *p* points to m
-    - &rarr; *(p+n)* points to *m+n*
-    - &rarr; *(p-n)* points to *m-n*
+- &rarr; *(p+n)* points to *m+n*
+- &rarr; *(p-n)* points to *m-n*
+
+## Indexing
+if point *p* points to element m in an array
+- &rarr; p[1] points to m+1
+- &rarr; p[-1] points to m-1
+
+## Array initialization
+Is easy compared to containers in the std lib.
+
+```c++
+const int month_lengths[]= {
+    31, 28, 31, 30, 31, 30,
+    31, 31, 30, 31, 30, 31
+};
+```
+
+# String literals
+A string literal is an array of const char with one more element.
+```c++
+const char hello[] = {
+        'H', 'e', 'l', 'l', 'o', '\0'
+};
+```
+has the same properties as "Hello".
+
+- '\0': null character used to mark then end
+
+## Arrays of character pointers
+We can initialize an array of charachter pointers by giving a sequence of string literals:
+```c++
+static const char* const letters[] = {
+    "A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D", "F"
+};
+```
