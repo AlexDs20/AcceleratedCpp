@@ -155,3 +155,14 @@ static const char* const letters[] = {
     "A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D", "F"
 };
 ```
+Which is an array of constant pointers to constant string literals.
+
+## Arguments to main
+Can access the number of inputs and the inputs to the main function.
+`argv` is pointer of pointers
+```c++
+int main(int argv, char** argv){
+for (int i=0; i<argv; ++i)
+    std::cout << argv[i] << std::endl;      // argv[i] is a char*
+}
+```
