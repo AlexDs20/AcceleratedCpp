@@ -166,3 +166,28 @@ for (int i=0; i<argv; ++i)
     std::cout << argv[i] << std::endl;      // argv[i] is a char*
 }
 ```
+
+## Reading and writing files
+Can write standard error `std::cerr` and log `std::clog`.
+Both output to standard error stream.
+
+- `std::cerr`: writes directly &rarr; high overhead, use for errors
+- `std::clog` buffers the data and writes whenever &rarr; faster if don't need to get the output directly, use for logging
+
+
+### Using files
+To use files, need to create objects of type `ifstream` and `ofstream`.
+
+Very similiar to `istream` and `ostream`.
+Can use an *ifstream* whenever an *istream* is expected. Similar with outputs.
+
+```c++
+#include <fstream>
+int main(){
+    std::ifstream infile("infile");
+    std::ofstream outfile("outfile");
+    std::string s;
+    while (std::getline(infile, s))
+        outfile << s << std::endl;
+}
+```
