@@ -3,6 +3,7 @@
 #include "array_and_pointers.hpp"
 #include "string_literals.hpp"
 #include "arrays_of_pointers.hpp"
+#include "reading_and_writting_files.hpp"
 
 int main(int argc, char** argv)
 {
@@ -23,5 +24,7 @@ int main(int argc, char** argv)
             std::cout << *argv[i] << " ";        // argv[i] is a char*
         std::cout << std::endl;
     }
+
+    reading_and_writting_files();
     return 0;
 }
