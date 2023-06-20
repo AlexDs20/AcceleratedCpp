@@ -191,3 +191,47 @@ int main(){
         outfile << s << std::endl;
 }
 ```
+
+## 3 Kinds of memory management
+### Automatic memory allocation
+Variables only defined to the current "context".
+
+Memory gets freed when exiting.
+
+```c++
+int* automatic_allocation(int value){
+    int x = value;
+    return &x;
+}
+```
+This function returns an invalid pointer because memory at x is freed when exiting the function.
+
+### Static memory allocation
+If we want to access variable defined in function, the variable can be made static
+
+```c++
+int* automatic_allocation(int value){
+    static int x = value;
+    return &x;
+}
+```
+The memory gets freed automatically.
+
+This works but we always return the same address.
+
+What happens if we want to return different addresses every time?
+
+### Dynamic memory allocation
+Can dynamically allocate memory. It needs to be freed manually.
+```c++
+int* automatic_allocation(int value){
+    int* p = new int(value);
+    return p;
+}
+int main(){
+    int* pt = automatic_allocation(42);
+    delete pt;
+}
+```
+Everytime the function is called a new object is created at a new memory address.
+The memory needs to be freed manually using delete.
