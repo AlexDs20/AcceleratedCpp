@@ -4,6 +4,7 @@
 #include "string_literals.hpp"
 #include "arrays_of_pointers.hpp"
 #include "reading_and_writting_files.hpp"
+#include "memory_management.hpp"
 
 int main(int argc, char** argv)
 {
@@ -25,6 +26,8 @@ int main(int argc, char** argv)
         std::cout << std::endl;
     }
 
-    reading_and_writting_files();
+    // reading_and_writting_files();
+
+    three_kinds_of_mem_management();
     return 0;
 }
