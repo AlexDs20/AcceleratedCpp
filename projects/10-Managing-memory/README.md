@@ -194,7 +194,7 @@ int main(){
 
 ## 3 Kinds of memory management
 ### Automatic memory allocation
-Variables only defined to the current "context".
+Variables only defined to the current scope.
 
 Memory gets freed when exiting.
 
@@ -210,7 +210,7 @@ This function returns an invalid pointer because memory at x is freed when exiti
 If we want to access variable defined in function, the variable can be made static
 
 ```c++
-int* automatic_allocation(int value){
+int* static_allocation(int value){
     static int x = value;
     return &x;
 }
@@ -224,14 +224,28 @@ What happens if we want to return different addresses every time?
 ### Dynamic memory allocation
 Can dynamically allocate memory. It needs to be freed manually.
 ```c++
-int* automatic_allocation(int value){
+int* dynamic_allocation(int value){
     int* p = new int(value);
     return p;
 }
 int main(){
-    int* pt = automatic_allocation(42);
+    int* pt = dynamic_allocation(42);
     delete pt;
 }
 ```
 Everytime the function is called a new object is created at a new memory address.
 The memory needs to be freed manually using delete.
+
+Can also dynamically allocate an array:
+
+```c++
+void dynamic_allocation_array(int length){
+    int* p = new int[length];
+
+    std::vector<int> v(p, p+length);
+    delete[] p;
+}
+```
+Objects are default initialized.
+
+- If no default initializer &rarr; not valid, compiler complains (&rarr; <allocator> can help with that, see next chapter, better to use than `new`)
