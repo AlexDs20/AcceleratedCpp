@@ -119,5 +119,133 @@ double c[3];
 ## Pointer Arithmetic
 
 if pointer *p* points to m
-    - &rarr; *(p+n)* points to *m+n*
-    - &rarr; *(p-n)* points to *m-n*
+- &rarr; *(p+n)* points to *m+n*
+- &rarr; *(p-n)* points to *m-n*
+
+## Indexing
+if point *p* points to element m in an array
+- &rarr; p[1] points to m+1
+- &rarr; p[-1] points to m-1
+
+## Array initialization
+Is easy compared to containers in the std lib.
+
+```c++
+const int month_lengths[]= {
+    31, 28, 31, 30, 31, 30,
+    31, 31, 30, 31, 30, 31
+};
+```
+
+# String literals
+A string literal is an array of const char with one more element.
+```c++
+const char hello[] = {
+        'H', 'e', 'l', 'l', 'o', '\0'
+};
+```
+has the same properties as "Hello".
+
+- '\0': null character used to mark then end
+
+## Arrays of character pointers
+We can initialize an array of charachter pointers by giving a sequence of string literals:
+```c++
+static const char* const letters[] = {
+    "A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D", "F"
+};
+```
+Which is an array of constant pointers to constant string literals.
+
+## Arguments to main
+Can access the number of inputs and the inputs to the main function.
+`argv` is pointer of pointers
+```c++
+int main(int argv, char** argv){
+for (int i=0; i<argv; ++i)
+    std::cout << argv[i] << std::endl;      // argv[i] is a char*
+}
+```
+
+## Reading and writing files
+Can write standard error `std::cerr` and log `std::clog`.
+Both output to standard error stream.
+
+- `std::cerr`: writes directly &rarr; high overhead, use for errors
+- `std::clog` buffers the data and writes whenever &rarr; faster if don't need to get the output directly, use for logging
+
+
+### Using files
+To use files, need to create objects of type `ifstream` and `ofstream`.
+
+Very similiar to `istream` and `ostream`.
+Can use an *ifstream* whenever an *istream* is expected. Similar with outputs.
+
+```c++
+#include <fstream>
+int main(){
+    std::ifstream infile("infile");
+    std::ofstream outfile("outfile");
+    std::string s;
+    while (std::getline(infile, s))
+        outfile << s << std::endl;
+}
+```
+
+## 3 Kinds of memory management
+### Automatic memory allocation
+Variables only defined to the current scope.
+
+Memory gets freed when exiting.
+
+```c++
+int* automatic_allocation(int value){
+    int x = value;
+    return &x;
+}
+```
+This function returns an invalid pointer because memory at x is freed when exiting the function.
+
+### Static memory allocation
+If we want to access variable defined in function, the variable can be made static
+
+```c++
+int* static_allocation(int value){
+    static int x = value;
+    return &x;
+}
+```
+The memory gets freed automatically.
+
+This works but we always return the same address.
+
+What happens if we want to return different addresses every time?
+
+### Dynamic memory allocation
+Can dynamically allocate memory. It needs to be freed manually.
+```c++
+int* dynamic_allocation(int value){
+    int* p = new int(value);
+    return p;
+}
+int main(){
+    int* pt = dynamic_allocation(42);
+    delete pt;
+}
+```
+Everytime the function is called a new object is created at a new memory address.
+The memory needs to be freed manually using delete.
+
+Can also dynamically allocate an array:
+
+```c++
+void dynamic_allocation_array(int length){
+    int* p = new int[length];
+
+    std::vector<int> v(p, p+length);
+    delete[] p;
+}
+```
+Objects are default initialized.
+
+- If no default initializer &rarr; not valid, compiler complains (&rarr; <allocator> can help with that, see next chapter, better to use than `new`)
