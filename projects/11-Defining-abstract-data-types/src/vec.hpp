@@ -27,8 +27,8 @@ class Vec{
         typedef const T& const_reference;
 
     private:    // implementation
-        T* data;                    // first element in the Vec
-        T* limit;                   // one past the last element in the Vec
+        iterator data;                    // first element in the Vec
+        iterator limit;                   // one past the last element in the Vec
 
         void create(){};
 };
