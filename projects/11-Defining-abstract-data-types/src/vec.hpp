@@ -16,6 +16,16 @@ class Vec{
         //
         explicit Vec(std::size_t n, const T& val=T()) { create(n, val); }
 
+        // types
+        typedef T* iterator;
+        typedef const T* const_iterator;
+        typedef std::size_t size_type;
+        // types for being able to use back_insterter that uses .push_back
+        typedef T value_type;
+        typedef std::ptrdiff_t difference_type;
+        typedef T& reference;
+        typedef const T& const_reference;
+
     private:    // implementation
         T* data;                    // first element in the Vec
         T* limit;                   // one past the last element in the Vec
