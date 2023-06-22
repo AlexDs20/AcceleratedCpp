@@ -7,15 +7,6 @@
 template <class T>
 class Vec{
     public:     // interface
-        Vec() { create(); }         // default constructor
-
-        // explicit:
-        //      only for constructors with 1 argument
-        //      compiler use constructor ONLY when the user explicitly invokes the constructor
-        //      i.e. specifies that it cannot be used for implicit conversions and copy-initialization
-        //
-        explicit Vec(std::size_t n, const T& val=T()) { create(n, val); }
-
         // types
         typedef T* iterator;
         typedef const T* const_iterator;
@@ -25,6 +16,20 @@ class Vec{
         typedef std::ptrdiff_t difference_type;
         typedef T& reference;
         typedef const T& const_reference;
+
+        // Constructors
+        Vec() { create(); }         // default constructor
+        // explicit:
+        //      only for constructors with 1 argument
+        //      compiler use constructor ONLY when the user explicitly invokes the constructor
+        //      i.e. specifies that it cannot be used for implicit conversions and copy-initialization
+        //
+        explicit Vec(std::size_t n, const T& val=T()) { create(n, val); }
+
+        // Operations
+        size_type size() const { return limit - data; };
+        T& operator[] (size_type i) { return data[i]; };
+        const T& operator[] (size_type i) const { return data[i]; };
 
     private:    // implementation
         iterator data;                    // first element in the Vec

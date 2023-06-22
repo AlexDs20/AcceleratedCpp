@@ -33,3 +33,15 @@ We want two **Constructors**:
             Vec<int> vi(100);       // explicit construction from an int
             Vec<int> vi = 100;      // error: implicit construct and copy to vi
           ```
+
+We can add types to be able to have useful features such as `back_inserter` working.
+
+
+Overloading index operator:
+```c++
+    T& operator[] (size_type i) { return data[i]; };
+    const T& operator[] (size_type i) const { return data[i]; };
+```
+The first one allow to read and assign!
+
+&rarr; Need for one for const object to not assign
