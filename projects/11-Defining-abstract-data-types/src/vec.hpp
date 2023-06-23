@@ -26,6 +26,8 @@ class Vec{
         //
         explicit Vec(std::size_t n, const T& val=T()) { create(n, val); }
 
+        Vec(const Vec& v) { create(v.begin(), v.end()); };   // copy constructor
+
         // Operations
         size_type size() const { return limit - data; };
         T& operator[] (size_type i) { return data[i]; };

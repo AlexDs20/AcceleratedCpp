@@ -45,3 +45,36 @@ Overloading index operator:
 The first one allow to read and assign!
 
 &rarr; Need for one for const object to not assign
+
+
+## Copy control
+We need to define what happens when objects are copied, assigned or destroyed.
+
+If we don't provide it, the compiler will synthesize them, can be good, can be bad.
+
+### Copy constructor
+
+- when pass object by value
+- when returning object by value
+```c++
+    int vi;
+    void_function_call(vi);                 // implicit copy vi into the parameters
+    int ret = return_function_call(vi);     // implicit copy the returned value in ret
+```
+- when explicitly initializing from another object
+```c++
+    vector<int> v1;
+    vector<int> v2 = v1;                    // explicit copy
+```
+
+Handled by copy constructor. Important that the parameter is a reference!
+```c++
+    template <class T>
+    class Vec {
+        public:
+            Vec(const Vec& v);              // copy constructor
+    };
+```
+Note that this copy constructor should "copy".
+
+E.g. we should not copy a pointer (i.e. the address where the data is) but we should copy the content and point to the copied content.
