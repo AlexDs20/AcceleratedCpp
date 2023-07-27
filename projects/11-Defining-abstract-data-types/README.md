@@ -78,3 +78,103 @@ Handled by copy constructor. Important that the parameter is a reference!
 Note that this copy constructor should "copy".
 
 E.g. we should not copy a pointer (i.e. the address where the data is) but we should copy the content and point to the copied content.
+
+### Assignment operator
+- when take a const ref to the class
+```c++
+class Vec {
+    public:
+        Vec& operator=(const Vec&);
+};
+Vec v1;
+Vec v2;
+v2 = v1;
+```
+- return type is reference to the left-hand side
+
+For assignment, often **must** obliterate existing value of the left-hand side (not the case of the copy constructor).
+
+#### member function outside of a class
+```c++
+template <class T>
+Vec<T>& Vec<T>::operator=(const Vec& rhs){
+    // check for self assign
+    if (&rhs != this) {
+        obliterate();
+
+        // Copy elements
+        create(rhs);
+    }
+}
+```
+#### *this* keyword
+- *this* only accessible in member function
+- pointer to the current object
+- bound to the left operand
+
+### Assignment is not initialization
+- Assignment always obliterates a previous value
+- Initialization never does:
+-   - Creates a new object and gives it a value at the same time
+
+Initialization happens:
+- variable declaration
+- function parameters on entry to a function
+- return value of a function when returning
+- in constructor initializers
+
+```c++
+    string url_ch = "~;/?:@=&$-_.+!*’(),";  // initialization
+    string spaces(url_ch.size(), ’ ’);      // initialization
+    string y;                               // initialization
+    y = url_ch;                             // assignment
+
+
+    vector<string> split(const string&);    // function declaration
+    vector<string> v;                       // initialization
+    v = split(line);            // on entry, initialization of split’s parameter from line;
+                                // on exit, both initialization of the return value
+                                // and assignment to v
+```
+
+### Destructor
+- What happens when object of class is destroyed
+- Should do all the cleanup such as releasing memory
+```c++
+    template <class T>
+    class Vec
+    {
+        public:
+            Vec();              // default constructor
+            ~Vec();             // destructor
+    };
+```
+
+- Typically, if the class needs a destructor (typically because we need to free memory), it needs a copy constructor and assignment operator
+
+### CAREFUL
+- If no constructor is provided the compiler synthesizes one
+- If no destructor or copy constructor, compiler synthesizes one. It may be wrong if dynamically allocates memory!
+- We do not want two objects with points pointing to the same memory!
+
+## Memory allocation
+- Using `new` initializes but we don't want that because:
+    - stuff will be initialized twice.
+    - when doubling the memory to contain more elements, the elements would be initialized but maybe never used.
+
+- Instead use the `<memory>` header:
+    - contains the `allocator<T>` class which can:
+        - allocate and without initialization
+        - provides pointer to `<T>` but empty... &rarr; dangerous!
+        - useful functions/member functions
+        ```c++
+        template <class T> class allocator {
+        public:
+            T* allocate(size_t);            // Allocates, uninitialized storage
+            void deallocate(T*, size_t);    // Frees the uninitialized storage from allocate
+            void construct(T*, const T&);   // Construct/initializes an object in the uninitialized storage
+            void destroy(T*);               // Destroys the object, runs the destructor for T making the storage uninitialized
+        };
+        template <class In, class For> For uninitialized_copy(In, In, For);             // copy elements from the sequence of the first 2 arguments (e.g. begin(), end()) into the third.
+        template <class For, class T> void uninitialized_fill(For, For, const T&);      // fill the space between the first two arguments with copies of the third argument
+        ```

@@ -4,11 +4,10 @@ project "11-Defining-abstract-data-types"
 
     includedirs
     {
-        "src/"
+        "include",
     }
 
     files
     {
-        "src/**.cpp",
-        "src/**.hpp"
+        "src/**.cpp"
     }
