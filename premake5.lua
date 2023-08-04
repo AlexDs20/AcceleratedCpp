@@ -5,6 +5,7 @@ workspace "Accelerated"
 
     -- We indicate that all the projects are C++ only
     language "C++"
+    cppdialect "C++11"
 
     -- We will compile for x86_64. You can change this to x86 for 32 bit builds.
     architecture "x86_64"
@@ -14,6 +15,10 @@ workspace "Accelerated"
     -- The optimized Release configuration will be used when shipping the app.
     configurations { "Debug", "Release" }
 
+    flags
+    {
+        "FatalWarnings"
+    }
     -- We use filters to set options, a new feature of Premake5.
     -- We now only set settings for the Debug configuration
     filter { "configurations:Debug" }
