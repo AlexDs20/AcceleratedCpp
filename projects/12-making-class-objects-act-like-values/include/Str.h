@@ -26,6 +26,8 @@ class Str {
         const char& operator[](size_type i) const {return data[i];}
         size_type size() const {return data.size();}
 
+        operator double() const {return data.size();};
+
     private:
         std::vector<char> data;
 };

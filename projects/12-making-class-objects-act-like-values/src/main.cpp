@@ -23,4 +23,7 @@ int main()
     Str one_more = my_string + " a const char*";
     std::cout << another_one << std::endl;
     std::cout << one_more << std::endl;
+
+    double length = my_string;
+    std::cout << "Length of '" << my_string << "': " << length << std::endl;
 }
