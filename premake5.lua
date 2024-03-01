@@ -63,4 +63,6 @@ workspace "Accelerated"
 -- include "projects/09-Defining-new-types"
 -- include "projects/10-Managing-memory"
 -- include "projects/11-Defining-abstract-data-types"
-include "projects/12-making-class-objects-act-like-values"
+-- include "projects/12-making-class-objects-act-like-values"
+include "projects/14-managing-memory-automatically"
+
